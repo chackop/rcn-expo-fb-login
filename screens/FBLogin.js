@@ -12,6 +12,10 @@ export default function FBLogin() {
 
     facebookLogIn = async () => {
         try {
+            const initFBSDK = await Facebook.initializeAsync('1125003214510486', 'expo-rcn-login-test')
+
+            // console.log('initFBSDK', initFBSDK)
+
             const {
                 type,
                 token,
