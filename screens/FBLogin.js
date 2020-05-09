@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity, ActivityIndicator } from 'react-native';
 import * as Facebook from 'expo-facebook';
 
@@ -10,11 +10,20 @@ export default function FBLogin() {
     const [userData, setUserData] = useState(null);
     const [isImageLoading, setImageLoadStatus] = useState(false);
 
+    useEffect(() => {
+        async function initAsync() {
+            const response = await Facebook.initializeAsync('1125003214510486', 'expo-rcn-login-test');
+        }
+        initAsync();
+        // return () => {
+        //     cleanup
+        // }
+    }, [])
+
     facebookLogIn = async () => {
         try {
-            const initFBSDK = await Facebook.initializeAsync('1125003214510486', 'expo-rcn-login-test')
 
-            // console.log('initFBSDK', initFBSDK)
+            console.log('facebookLogIn')
 
             const {
                 type,
@@ -25,6 +34,8 @@ export default function FBLogin() {
             } = await Facebook.logInWithReadPermissionsAsync('1125003214510486', {
                 permissions: ['public_profile'],
             });
+            console.log('type', type)
+
             if (type === 'success') {
                 // Get the user's name using Facebook's Graph API
                 fetch(`https://graph.facebook.com/me?access_token=${token}&fields=id,name,email,picture.height(500)`)
