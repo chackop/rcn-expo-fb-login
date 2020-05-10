@@ -23,7 +23,12 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "bundleIdentifier": "com.expofblogin",
+      "buildNumber": "1.0.0"
+    },
+    "android": {
+      "package": "com.expofblogin",
+      "versionCode": 1
     },
     "web": {
       "favicon": "./assets/images/favicon.png"
